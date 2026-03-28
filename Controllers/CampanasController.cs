@@ -15,12 +15,26 @@ namespace RetailCam.Controllers
             new Campana { Id = 3, Nombre = "Fashion Week Lima", Categoria = "Moda", Estado = "Próxima", FechaInicio = new DateTime(2026, 4, 10), FechaFin = new DateTime(2026, 4, 17), DescuentoPct = 40, Canal = "App", Descripcion = "La mejor moda de temporada." }
         };
 
-        // RF: Listado - /Campanas
-        public IActionResult Index()
+        // RF: Listado y Filtro - /Campanas
+        public IActionResult Index(string categoria, string estado)
         {
-            // ¡BOMBA DE CONFLICTO 1! Agregamos esta línea inútil solo para molestar a Git
-            ViewBag.MensajeTrampa = "Este mensaje va a causar un conflicto de Git";
-            return View(_campanas);
+            var campanasFiltradas = _campanas.AsQueryable();
+
+            if (!string.IsNullOrEmpty(categoria) && categoria != "Todos")
+            {
+                campanasFiltradas = campanasFiltradas.Where(c => c.Categoria == categoria);
+            }
+
+            if (!string.IsNullOrEmpty(estado) && estado != "Todos")
+            {
+                campanasFiltradas = campanasFiltradas.Where(c => c.Estado == estado);
+            }
+
+            ViewBag.CategoriaSeleccionada = categoria;
+            ViewBag.EstadoSeleccionado = estado;
+            ViewBag.TotalEncontradas = campanasFiltradas.Count();
+
+            return View(campanasFiltradas.ToList());
         }
 
         // RF: Detalle - /Campanas/Detalle/{id}
