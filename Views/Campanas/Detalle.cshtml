@@ -1,0 +1,42 @@
+@model RetailCam.Models.Campana
+
+<div class="container mt-4">
+    <a asp-action="Index" class="text-decoration-none text-secondary mb-4 d-inline-block">
+        &larr; Volver al listado
+    </a>
+
+    <div class="card shadow-sm border-0 bg-white" style="border-radius: 15px;">
+        <div class="card-body p-4 p-md-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fw-bold mb-0">@Model.Nombre</h2>
+                <span class="badge bg-success fs-6">@Model.Estado</span>
+            </div>
+
+            <div class="row mb-4 mt-4">
+                <div class="col-md-6 mb-4">
+                    <p class="text-muted mb-1"><small>Categoría</small></p>
+                    <p class="fw-medium m-0">🏷️ @Model.Categoria</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <p class="text-muted mb-1"><small>Canal</small></p>
+                    <p class="fw-medium m-0">💻 @Model.Canal</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <p class="text-muted mb-1"><small>Inicio</small></p>
+                    <p class="fw-medium m-0">📅 @Model.FechaInicio.ToString("dd 'de' MMMM 'de' yyyy")</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <p class="text-muted mb-1"><small>Fin</small></p>
+                    <p class="fw-medium m-0">📅 @Model.FechaFin.ToString("dd 'de' MMMM 'de' yyyy")</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <p class="text-muted mb-1"><small>Descuento</small></p>
+                    <p class="fw-medium fs-5 m-0">% @Model.DescuentoPct.ToString("0")%</p>
+                </div>
+            </div>
+
+            <h6 class="fw-bold mt-2">Descripción</h6>
+            <p class="text-dark">@Model.Descripcion</p>
+        </div>
+    </div>
+</div>
