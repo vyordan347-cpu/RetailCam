@@ -1,0 +1,37 @@
+<div class="container mt-4">
+    <h2 class="mb-4">Resumen de Campañas</h2>
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <div class="card bg-primary text-white h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Total Campañas</h5>
+                    <h2 class="mb-0">@ViewBag.TotalCampanas</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card bg-success text-white h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Vigentes</h5>
+                    <h2 class="mb-0">@ViewBag.Vigentes</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card bg-info text-white h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Próximas</h5>
+                    <h2 class="mb-0">@ViewBag.Proximas</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card bg-warning text-dark h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Promedio Dcto.</h5>
+                    <h2 class="mb-0">@ViewBag.PromedioDescuento.ToString("0.00")%</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
