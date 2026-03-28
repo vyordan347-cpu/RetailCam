@@ -3,6 +3,36 @@
 <div class="container mt-4">
     <h2 class="mb-4">Campañas Comerciales</h2>
 
+    <form asp-action="Index" method="get" class="mb-4 bg-light p-3 rounded shadow-sm border">
+        <div class="row align-items-end">
+            <div class="col-md-4">
+                <label class="form-label text-muted small fw-bold">Categoría</label>
+                <select name="categoria" class="form-select">
+                    <option value="Todos">Todos</option>
+                    <option value="Electro" selected="@(ViewBag.CategoriaSeleccionada == "Electro" ? "selected" : null)">Electro</option>
+                    <option value="Hogar" selected="@(ViewBag.CategoriaSeleccionada == "Hogar" ? "selected" : null)">Hogar</option>
+                    <option value="Moda" selected="@(ViewBag.CategoriaSeleccionada == "Moda" ? "selected" : null)">Moda</option>
+                    <option value="Tecnología" selected="@(ViewBag.CategoriaSeleccionada == "Tecnología" ? "selected" : null)">Tecnología</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label text-muted small fw-bold">Estado</label>
+                <select name="estado" class="form-select">
+                    <option value="Todos">Todos</option>
+                    <option value="Vigente" selected="@(ViewBag.EstadoSeleccionado == "Vigente" ? "selected" : null)">Vigente</option>
+                    <option value="Próxima" selected="@(ViewBag.EstadoSeleccionado == "Próxima" ? "selected" : null)">Próxima</option>
+                    <option value="Finalizada" selected="@(ViewBag.EstadoSeleccionado == "Finalizada" ? "selected" : null)">Finalizada</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-primary px-4 me-2">Filtrar</button>
+                <a asp-action="Index" class="btn btn-outline-secondary px-4">Limpiar</a>
+            </div>
+        </div>
+    </form>
+
+    <p class="text-muted small mb-3">@ViewBag.TotalEncontradas campaña(s) encontrada(s)</p>
+
     <div class="row">
         @foreach (var item in Model)
         {
@@ -11,7 +41,7 @@
                     <div class="card-body">
                         <h5 class="card-title fw-bold">
                             @item.Nombre 
-                            <span class="badge bg-success float-end">@item.Estado</span>
+                            <span class="badge @(item.Estado == "Vigente" ? "bg-success" : item.Estado == "Próxima" ? "bg-primary" : "bg-secondary") float-end">@item.Estado</span>
                         </h5>
                         <p class="card-text mt-3">
                             <small class="text-muted">🏷️ @item.Categoria | 📱 @item.Canal</small><br />
