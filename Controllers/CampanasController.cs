@@ -14,9 +14,31 @@ namespace RetailCam.Controllers
         };
 
         // RF: Listado - /Campanas
-        public IActionResult Index()
+        public IActionResult Index(string categoria, string estado)
         {
-            return View(_campanas);
+            // Empezamos asumiendo que mostraremos todas las campañas
+            var campanasFiltradas = _campanas.AsQueryable();
+
+            // Si el usuario eligió una categoría (y no es "Todos"), filtramos
+            if (!string.IsNullOrEmpty(categoria) && categoria != "Todos")
+            {
+                campanasFiltradas = campanasFiltradas.Where(c => c.Categoria == categoria);
+            }
+
+            // Si el usuario eligió un estado (y no es "Todos"), filtramos
+            if (!string.IsNullOrEmpty(estado) && estado != "Todos")
+            {
+                campanasFiltradas = campanasFiltradas.Where(c => c.Estado == estado);
+            }
+
+            // Guardamos las selecciones en el ViewBag para que los menús desplegables 
+            // no se borren después de hacer clic en buscar
+            ViewBag.CategoriaSeleccionada = categoria;
+            ViewBag.EstadoSeleccionado = estado;
+            ViewBag.TotalEncontradas = campanasFiltradas.Count();
+
+            // Enviamos la lista ya filtrada a la vista
+            return View(campanasFiltradas.ToList());
         }
     }
 }
