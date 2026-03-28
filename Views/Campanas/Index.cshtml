@@ -1,0 +1,27 @@
+@model IEnumerable<RetailCam.Models.Campana>
+
+<div class="container mt-4">
+    <h2 class="mb-4">Campañas Comerciales</h2>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">
+                            @item.Nombre 
+                            <span class="badge bg-success float-end">@item.Estado</span>
+                        </h5>
+                        <p class="card-text mt-3">
+                            <small class="text-muted">🏷️ @item.Categoria | 📱 @item.Canal</small><br />
+                            <strong>Descuento:</strong> @item.DescuentoPct% <br />
+                            <strong>Fechas:</strong> @item.FechaInicio.ToString("dd MMM. yyyy") - @item.FechaFin.ToString("dd MMM. yyyy")
+                        </p>
+                        <a asp-action="Detalle" asp-route-id="@item.Id" class="btn btn-light border w-100 mt-2">Ver detalle</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
